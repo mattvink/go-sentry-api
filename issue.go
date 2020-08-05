@@ -117,6 +117,7 @@ type issueQuery struct {
 	StatsPeriod   *string
 	ShortIDLookup *bool
 	Query         *string
+	Sort          *string
 }
 
 func (i *issueQuery) ToQueryString() string {
@@ -130,18 +131,22 @@ func (i *issueQuery) ToQueryString() string {
 	if i.Query != nil {
 		query.Add("query", *i.Query)
 	}
+	if i.Sort != nil {
+		query.Add("sort", *i.Sort)
+	}
 
 	return query.Encode()
 }
 
 //GetIssues will fetch all issues for organization and project
-func (c *Client) GetIssues(o Organization, p Project, StatsPeriod *string, ShortIDLookup *bool, query *string) ([]Issue, *Link, error) {
+func (c *Client) GetIssues(o Organization, p Project, StatsPeriod *string, ShortIDLookup *bool, query *string, Sort *string) ([]Issue, *Link, error) {
 	var issues []Issue
 
 	issueFilter := &issueQuery{
 		StatsPeriod:   StatsPeriod,
 		ShortIDLookup: ShortIDLookup,
 		Query:         query,
+		Sort:          Sort,
 	}
 
 	link, err := c.doWithPaginationQuery(
