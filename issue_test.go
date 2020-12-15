@@ -141,11 +141,11 @@ func TestIssueResource(t *testing.T) {
 
 			details, ok := (*firstIssue.StatusDetails)["inNextRelease"].(bool)
 			if !ok {
-				t.Error("Status did not get updated")
+				t.Error("Status details did not get updated")
 			}
 
 			if !details {
-				t.Error("Status did not get updated")
+				t.Error("Status details did not get updated")
 			}
 
 			t.Run("Delete the first issue in this project", func(t *testing.T) {
