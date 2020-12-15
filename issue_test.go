@@ -83,7 +83,7 @@ func TestIssueResource(t *testing.T) {
 			}
 			for _, issue := range issues {
 				if issue.Stats.FourteenDays == nil {
-					t.Fatal("We should be able to get 14 days of stats for this issue but didn't.")
+					t.Fatal("We should be able to get 14 days of stats for this issue but didn't")
 				}
 			}
 		})
