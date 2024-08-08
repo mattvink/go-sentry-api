@@ -82,7 +82,15 @@ type Activity struct {
 
 // Issue returns a issue found in sentry
 type Issue struct {
-	Annotations         *[]string               `json:"annotations,omitempty"`
+	// Annotations according to the sentry api schema is a []string.
+	//	However, the sentry api has been returning objects as well
+	// 	in json format, so we are using interface{} to handle any cases
+	//	  eg:
+	//	  {
+	//	    "url":"https://someurl.com",
+	//	    "displayName": "somename"
+	//	  }
+	Annotations         *[]interface{}          `json:"annotations,omitempty"`
 	AssignedTo          *InternalUser           `json:"assignedTo,omitempty"`
 	Activity            *[]Activity             `json:"activity,omitempty"`
 	Count               *string                 `json:"count,omitempty"`
